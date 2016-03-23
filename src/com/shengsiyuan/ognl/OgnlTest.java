@@ -1,5 +1,8 @@
 package com.shengsiyuan.ognl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ognl.Ognl;
 import ognl.OgnlContext;
 import ognl.OgnlException;
@@ -93,5 +96,31 @@ public class OgnlTest {
 		Object object14 = Ognl.getValue(object13, context, context.getRoot());
 		
 		System.out.println(object14);
+		
+		System.out.println("--------------------------------");
+		
+		Object object15 = Ognl.getValue("{'aa', 'bb', 'cc', 'dd'}[2]", context, context.getRoot());
+		
+		System.out.println(object15);
+		
+		System.out.println("--------------------------------");
+		
+		dog.setFriends(new String[] {"aa", "bb", "cc"});
+		
+		Object object16 = Ognl.getValue("#dog.friends[2]", context, context.getRoot());
+		
+		System.out.println(object16);
+		
+		System.out.println("--------------------------------");
+		
+		List<String> list = new ArrayList<String>();
+		
+		list.add("hello");
+		list.add("world");
+		list.add("hello world");
+		
+		context.put("list", list);
+		
+		System.out.println(Ognl.getValue("#list[0]", context, context.getRoot()));
 	}
 }
