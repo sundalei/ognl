@@ -122,5 +122,51 @@ public class OgnlTest {
 		context.put("list", list);
 		
 		System.out.println(Ognl.getValue("#list[0]", context, context.getRoot()));
+		
+		System.out.println("--------------------------------");
+		
+		System.out.println(Ognl.getValue("#{'key1':'value1', 'key2':'value2', 'key3': 'value3', 'key4':'value4'}['key3']",
+				context, context.getRoot()));
+		
+		System.out.println("--------------------------------");
+		
+		List<Person> persons = new ArrayList<Person>();
+		
+		Person p1 = new Person();
+		Person p2 = new Person();
+		Person p3 = new Person();
+		
+		p1.setName("zhangsan");
+		p2.setName("lisi");
+		p3.setName("wangwu");
+		
+		persons.add(p1);
+		persons.add(p2);
+		persons.add(p3);
+		
+		context.put("persons", persons);
+		
+		System.out.println(Ognl.getValue("#persons.{? #this.name.length() > 4}[0].name", context, context.getRoot()));
+		
+		System.out.println("--------------------------------");
+		
+		System.out.println(Ognl.getValue("#persons.{^ #this.name.length() > 4}[0].name", context, context.getRoot()));
+		
+		System.out.println("--------------------------------");
+		
+		System.out.println(Ognl.getValue("#persons.{$ #this.name.length() > 4}[0].name", context, context.getRoot()));
+		
+		System.out.println("--------------------------------");
+		
+		System.out.println(Ognl.getValue("#persons.{name}", context, context.getRoot()));
+		
+		System.out.println("--------------------------------");
+		
+		System.out.println(Ognl.getValue("#persons.{#this.name.length() > 4 ? #this.name : 'hello world'}", context, context.getRoot()));
+		
+		
+		
+		
+		
 	}
 }
